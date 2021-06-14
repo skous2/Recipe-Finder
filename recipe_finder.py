@@ -33,10 +33,24 @@ def calc_time(time):
 def convert(row):
     #print(row)
     return '<a href="{0}" target="_blank">{0}</a>'.format(row)
-    
-st.title('Recipe Finder')
 
+# page_bg_img = '''
+# <style>
+# body {
+# background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
+# background-size: cover;
+# }
+# </style>
+# '''
+
+# st.markdown(page_bg_img, unsafe_allow_html=True)
+    
+st.title('Recipe-Finder')
+st.write('Ingredient Search')
 searchlist = st.text_area('Enter the ingredients you want to search, line by line')
+
+st.write('Title Search')
+titlesearch = st.text_input('Enter an aspect of the title, line by line')
 
 searchlist = searchlist.lower().split('\n')
 
@@ -54,6 +68,6 @@ master.Link = master.Link.apply(convert)
 
 #searchlist = ['sun-dried', 'cream']
 
-df = master.loc[master.Ingredients.apply(lambda x: find_ingredient(searchlist, x)), ['Blog', 'Recipe', 'Link', 'Time']].sort_values('Time').reset_index(drop = True)
+df = master.loc[master.Ingredients.apply(lambda x: find_ingredient(searchlist, x)) & (master.Recipe.str.lower().str.find(titlesearch) > -1), ['Blog', 'Recipe', 'Link', 'Time']].sort_values('Time').reset_index(drop = True)
 
 st.write(df.to_html(escape=False), unsafe_allow_html=True)
