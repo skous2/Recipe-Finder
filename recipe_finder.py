@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 import pandas as pd
 import numpy as np
 import random
@@ -44,13 +45,17 @@ def convert(row):
 # '''
 
 # st.markdown(page_bg_img, unsafe_allow_html=True)
-    
-st.title('Recipe-Finder')
-st.write('Ingredient Search')
-searchlist = st.text_area('Enter the ingredients you want to search, line by line')
 
-st.write('Title Search')
-titlesearch = st.text_input('Enter an aspect of the title, line by line')
+st.title('Recipe-Finder')
+
+col1, col2 = st.beta_columns((1,4))
+    
+
+col1.write('Ingredient Search')
+searchlist = col1.text_area('Enter the ingredients you want to search, line by line')
+
+col1.write('Title Search')
+titlesearch = col1.text_input('Enter an aspect of the title, line by line')
 
 searchlist = searchlist.lower().split('\n')
 
@@ -70,4 +75,4 @@ master.Link = master.Link.apply(convert)
 
 df = master.loc[master.Ingredients.apply(lambda x: find_ingredient(searchlist, x)) & (master.Recipe.str.lower().str.find(titlesearch) > -1), ['Blog', 'Recipe', 'Link', 'Time']].sort_values('Time').reset_index(drop = True)
 
-st.write(df.to_html(escape=False), unsafe_allow_html=True)
+col2.write(df.to_html(escape=False), unsafe_allow_html=True)
