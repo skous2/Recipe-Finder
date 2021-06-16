@@ -2,13 +2,7 @@ import streamlit as st
 st.set_page_config(layout="wide")
 import pandas as pd
 import numpy as np
-import random
-import requests
-import xml.etree.ElementTree as ET
-from bs4 import BeautifulSoup as soup
-from random import randint
-from time import sleep
-from urllib.request import Request, urlopen
+
 
 pd.set_option('display.max_colwidth', None)
 
