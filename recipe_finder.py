@@ -70,7 +70,7 @@ master.Link = master.Link.apply(convert)
 
 df = master.loc[master.Ingredients.apply(lambda x: find_ingredient(searchlist, x)) & (master.Recipe.str.lower().str.find(titlesearch) > -1), ['Blog', 'Recipe', 'Link', 'Time']].sort_values('Time').reset_index(drop = True)
 
-col2.write('Results for search criteria')
+#col2.write('Results for search criteria')
 
 if col2.button('search recipes'):
     col2.write(df.to_html(escape=False), unsafe_allow_html=True)
