@@ -33,7 +33,7 @@ def convert(row):
 
 
 #st.title('Recipe-Finder')
-st.markdown("<h1 style='text-align: center; color: red;'>Recipe Finder</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: #FF0066;'>Recipe Finder</h1>", unsafe_allow_html=True)
 
 st.markdown('***')
 
